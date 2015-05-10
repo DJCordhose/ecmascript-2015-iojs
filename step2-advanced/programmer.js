@@ -16,8 +16,6 @@ Programmer.prototype.code = function () {
     return this.getName() + " codes in " + this.language;
 };
 
-
-
 var programmer = new Programmer('Olli', 'Cobol');
 
 var programmers = [programmer, new Programmer('Granny', 'Haskell')];

@@ -5,7 +5,7 @@
   "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "iojs --use_strict --harmony --es_staging --harmony_modules --harmony_arrow_functions --harmony_proxies --harmony_arrays --harmony_array_includes --harmony_proxies --harmony_regexps start.js"
+    "start": "iojs --use_strict --es_staging --harmony_modules --harmony_arrow_functions --harmony_proxies --harmony_arrays --harmony_array_includes --harmony_regexps --harmony-computed-property-names --harmony-rest-parameters --harmony_unicode --harmony_unicode_regexps sandbox.js"
   },
   "repository": {
     "type": "git",

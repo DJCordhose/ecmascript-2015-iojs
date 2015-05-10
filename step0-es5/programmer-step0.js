@@ -13,10 +13,12 @@ function Programmer(name, language) {
 }
 Programmer.prototype = Object.create(Person.prototype);
 Programmer.prototype.code = function () {
-    return this.getName() + " codes in " + this.language;
+    return Programmer.codes(this.getName(), this.language);
 };
 
-
+Programmer.codes = function(name, language) {
+    return name + " codes in " + language;
+}
 
 var programmer = new Programmer('Olli', 'Cobol');
 
