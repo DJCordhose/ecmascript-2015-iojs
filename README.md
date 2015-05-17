@@ -1,72 +1,35 @@
-# ecmascript-2015-iojs
-Sandbox for ECMAScript 2015 features available in io.js 2.x
+# ECMAScript 2015 on io.js 
 
-# Workshop
+## Introduction
+ECMAScript 2015, also known as ECMAScript 6 or ES6 for short, is the upcoming version of the ECMAScript standard. 
+[io.js already supports](http://kangax.github.io/compat-table/es6/#iojs) a significant number of features of this 
+standard natively, that is without any kind of transpiling.
 
-# Prerequisites of students
+Inspired by stile and content of this really nice 
+[overview of ES6 features by Luke Hoban](https://github.com/lukehoban/es6features) you can find an overview what is
+supported in io.js already and what is not supported, yet.
 
-* Installation: Have this repo and the latest version of io.js 2.x installed
-* Have any form of editor or IDE to write JavaScript
-* Knowledge of ES5
+io.is supports the following new features:
+- [arrows](#arrows)
+- [classes](#classes)
+- [enhanced object literals](#enhanced-object-literals)
+- [template strings](#template-strings)
+- [destructuring](#destructuring)
+- [let + const](#let--const)
+- [iterators + for..of](#iterators--forof)
+- [generators](#generators)
+- [unicode](#unicode)
+- [map + set + weakmap + weakset](#map--set--weakmap--weakset)
+- [symbols](#symbols)
+- [subclassable built-ins](#subclassable-built-ins)
+- [promises](#promises)
+- [math + number + string + array + object APIs](#math--number--string--array--object-apis)
+- [binary and octal literals](#binary-and-octal-literals)
 
-# Assignment
-
-start.js written in ES5, convert it to ES6
-
-# Format
-
-Instructor explains a new ES6 concept, support by io.js and students apply it to start.js.
-By doing so they incrementally transform the ES5 example into ES6
-
-## Step 0
-
-Explain ES5 and its pain points
-
-## Step 1: Basic stuff
-
-* replace all variables to ES6 block scope versions (let, const)
-* replace loop with for...of
-* => (syntax does work, but no automatic binding to this) (in .forEach)
-* String interpolation (`${name} codes in ${language}`)
-
-## Step 2: Advanced
-
-* class, extends, static
-* Set, Map, Iterable, Symbol
-
-## Step X
-
-Quickly show all the features that we have not talked about, yet, but are still supported
-
-* Promises
-* Generators
-* proxies
-
-# Schedule
-
-Workshop takes approx. 45 minutes
-
-* Set Up (10 minutes): Install io.js 2.0 and clone this repo, execute first script using io.js
-* Step-0 (5 minutes)
-* Step-1 (15 minutes)
-* Step-2 (15 minutes)
-* Step-X (whatever time is left)
-
-# Links
-* https://iojs.org/en/es6.html
-* http://kangax.github.io/compat-table/es6/
-
-# What is supported
-* class, extends, static
-* let/const
-* for..of
-* String interpolation (`${name} codes in ${language}`)
-* Promises
-* Generators
-* Set, Map, Iterable, Symbol
-* => (syntax does work, but no automatic binding to this)
-
-# Applications?
-
-Where can this be beneficial within the node libraries?
-
+and those are the features io.is does not support, yey:
+- [default + rest + spread](#default--rest--spread)
+- [modules](#modules)
+- [module loaders](#module-loaders)
+- [proxies](#proxies)
+- [reflect api](#reflect-api)
+- [tail calls](#tail-calls)
