@@ -16,7 +16,7 @@ Programmer.prototype.code = function () {
     return Programmer.codes(this.getName(), this.language);
 };
 
-Programmer.codes = function(name, language) {
+Programmer.codes = function (name, language) {
     return name + " codes in " + language;
 }
 
@@ -24,11 +24,11 @@ var programmer = new Programmer('Olli', 'Cobol');
 
 var programmers = [programmer, new Programmer('Granny', 'Haskell')];
 
-for (var i in programmers) {
-    (function () {
+(function () {
+    for (var i in programmers) {
         var p = programmers[i];
         console.log(p.code());
-    })();
-}
+    }
+})();
 
 console.log(typeof p);

@@ -1,3 +1,11 @@
+const obj = {
+    methodOfObj: function() {
+        return () => this;
+    }
+};
+
+console.log(obj.methodOfObj()() === obj);
+/*
 'use strict'
 
 class Person {
@@ -77,3 +85,4 @@ function factorial(n, acc) {
 
 // Still stack overflows on io.js,
 //factorial(100000)
+*/
