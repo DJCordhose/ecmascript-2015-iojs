@@ -1,3 +1,5 @@
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
+
 const programmers = [];
 programmers.push('Oma');
 programmers.push('Olli');

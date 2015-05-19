@@ -1,3 +1,6 @@
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
+
 // a simple block, not a function
 {
     // error: there is no hoisting, you can not use x before definition

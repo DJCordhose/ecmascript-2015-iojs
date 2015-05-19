@@ -1,7 +1,7 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 
 // ES5
-var es5 = function() {
+var es5 = function () {
     return 10;
 }
 console.log(es5()); // 10
@@ -18,7 +18,7 @@ console.log(es6_short()) // 10
 
 // basic syntax does work, but no automatic binding to this
 const obj = {
-    methodOfObj: function() {
+    methodOfObj: function () {
         return () => this;
     }
 };

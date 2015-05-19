@@ -9,14 +9,22 @@ standard natively, that is without any kind of transpiling.
 
 Inspired by stile and content of this really nice 
 [overview of ES6 features by Luke Hoban](https://github.com/lukehoban/es6features) you can find an overview of what is
-supported in io.js already. You can find all examples on the page in the `features` folder as well.
+supported in io.js already. You can find all examples on the page in the `features` folder as well. 
+
+You can run each example in that folder using the prepared `run.sh` script which expects a path to the example
+as its first parameter. When you are in the base directory, 
+running the first example from the command line would look this this
+
+> ./run.sh features/1-let-const.js
+
+`run.sh` switches on all ES6 features of `io.js` even when they are not mature, yet.
 
 In the `exercise` folder you can try the new features on a complete example.
 
 io.is (partially) supports the following new features:
 - [let + const](#let--const)
 - [for..of](#forof)
-- [arrow functions](#arrow--functions)
+- [arrow functions](#arrow-functions)
 - [template strings](#template-strings)
 
 ### Let + Const
@@ -78,7 +86,7 @@ flag.
 
 ```JavaScript
 // ES5
-var es5 = function() {
+var es5 = function () {
     return 10;
 }
 console.log(es5()); // 10
@@ -95,11 +103,27 @@ console.log(es6_short()) // 10
 
 // basic syntax does work, but no automatic binding to this
 const obj = {
-    methodOfObj: function() {
+    methodOfObj: function () {
         return () => this;
     }
 };
 
 // true in firefox, false in io.js
 console.log(obj.methodOfObj()() === obj);
+```
+
+### Template strings
+
+Using template strings you can embed expressions into them and let them span multiple lines.
+
+```JavaScript
+const a = 5;
+const b = 10;
+
+// ES5
+console.log("Fifteen is " + (a + b) + " and\nnot " + (2 * a + b) + ".");
+
+// ES6
+console.log(`Fifteen is ${a + b} and
+not ${2 * a + b}.`);
 ```
