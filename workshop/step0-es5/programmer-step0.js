@@ -29,4 +29,10 @@ var programmers = [programmer, new Programmer('Granny', 'Haskell')];
     }
 })();
 
+// or
+
+programmers.forEach(function(p) {
+    console.log(p.code());
+});
+
 console.log(typeof p);

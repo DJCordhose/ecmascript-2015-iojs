@@ -16,7 +16,7 @@ Programmer.prototype.code = function () {
 
 Programmer.codes = function (name, language) {
     return `${name} codes in ${language}`;
-}
+};
 
 const programmer = new Programmer('Olli', 'Cobol');
 
@@ -26,6 +26,10 @@ for (let p of programmers) {
     console.log(p.code());
 }
 
-programmers.forEach((p) => console.log(p.code()));
+// or
+
+programmers.forEach(function(p) {
+    console.log(p.code());
+});
 
 console.log(typeof p);
