@@ -11,7 +11,7 @@ Inspired by style and content of this really nice
 [overview of ES6 features by Luke Hoban](https://github.com/lukehoban/es6features), here you can find an overview of what is
 supported in io.js already. [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) was used as a normative reference. 
 
-All of the examples below can also be found in the `features` folder as individual runable applications. You can run an example using the prepared `run.sh` script which expects the path to an example
+All of the examples below can also be found in the `features` folder as individual runnable applications. You can run an example using the prepared `run.sh` script which expects the path to an example
 as its first parameter. When you are in the base directory, 
 running the first example from the command line would look this this:
 
@@ -25,12 +25,14 @@ In the `workshop` folder you can try the new features on a complete example.
 ## Overview
 io.js as of release 2.0 (partially) supports the following new features:
 
-Feature                               | Cmd line switch needed to enable
-------------------------------------- | --------------------------------
-[let + const](#let--const)            | already enabled
-[for..of](#forof)                     | already enabled
-[template strings](#template-strings) | already enabled
-[arrow functions](#arrow-functions)   | `--harmony_arrow_functions`
+Feature                                               | Command line switch needed to enable
+----------------------------------------------------- | -------------------------------------
+[let + const](#let--const)                            | already enabled
+[for..of](#forof)                                     | already enabled
+[template strings](#template-strings)                 | already enabled
+[arrow functions](#arrow-functions)                   | `--harmony_arrow_functions`
+[enhanced object literal](#enhanced-object-literal)   | already enabled (`--harmony-computed-property-names` for computed property names)                 
+
 
 ### Let + Const
 Blocks now create scopes for `let` and `const`. Semantics of `var` remain unchanged.
@@ -132,4 +134,55 @@ const obj = {
 
 obj.methodOfObj();
 ```
+
+### Enhanced Object Literal
+ES6 introduces some enhancements and simplifications to the Object Literal. You now can leave out a value for a property name,
+if there is already an object defined with the same name as your property, i.e. it's enough to write `name` instead of `name:name`.
+For functions declared on an object you can leave out the `:function()` notation and instead simply write the function name.
+Using the special property name `__proto__` you can directly set the prototype of an object. Inside a function you can call `super()`
+to invoke functions from it's prototype.
+
+```JavaScript
+const name = 'Lemmy';
+
+const person = {
+	name, // ES5: name: name
+
+	toString() { // ES5: toString: function()
+		return `This is ${this.name}`;
+	}
+};
+
+const musician = {
+	// change prototype
+	__proto__: person,
+
+	toString() {
+		// call to super
+		return `${super.toString()}, let's get loud`;
+	}
+}
+
+console.log(person.name); // Lemmy
+console.log(person.toString()); // This is Lemmy
+console.log(musician.name); // Lemmy (note 'name' comes from person)
+console.log(musician.toString()); // This is Lemmy, let's get loud
+```
+
+And it is even possible to use property names that are defined dynamically using a function call. Note that this feature requires the `--harmony-computed-property-names`
+ switch to be set:
+
+```JavaScript
+function secretKey() {
+	return 'sixsixsix';
+}
+
+// Only with: --harmony-computed-property-names
+const obj = {
+	[ 'prop_' + secretKey() ]: 'Number of the beast'
+}
+console.log(obj.prop_666); // Number of the beast
+```
+
+
 
