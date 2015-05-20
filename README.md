@@ -17,11 +17,13 @@ running the first example from the command line would look this this:
 
 > ./run.sh features/1-let-const.js
 
-Note: `run.sh` automatically switches on all [ES6 features](https://iojs.org/es6.html) of `io.js` even when they are not mature, yet.
+Note: `run.sh` automatically switches on all [ES6 features](https://iojs.org/es6.html) of `io.js` even when they are not mature, yet. Note that
+the examples need at least version 2.0 of io.js.
 
 In the `workshop` folder you can try the new features on a complete example.
 
-io.is (partially) supports the following new features:
+## Overview
+io.js as of release 2.0 (partially) supports the following new features:
 
 Feature                               | Cmd line switch needed to enable
 ------------------------------------- | --------------------------------
