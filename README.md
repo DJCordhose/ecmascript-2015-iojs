@@ -7,17 +7,17 @@ ECMAScript 2015, also known as ECMAScript 6 or ES6 for short, is the upcoming ve
 [io.js already supports](http://kangax.github.io/compat-table/es6/#iojs) a significant number of features of this 
 standard natively, that is without any kind of transpiling.
 
-Inspired by stile and content of this really nice 
-[overview of ES6 features by Luke Hoban](https://github.com/lukehoban/es6features) you can find an overview of what is
+Inspired by style and content of this really nice 
+[overview of ES6 features by Luke Hoban](https://github.com/lukehoban/es6features), here you can find an overview of what is
 supported in io.js already. [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) was used as a normative reference. 
 
-You can find all examples in the `features` folder as well. You can run each example in that folder using the prepared `run.sh` script which expects a path to the example
+All of the examples below can also be found in the `features` folder as individual runable applications. You can run an example using the prepared `run.sh` script which expects the path to an example
 as its first parameter. When you are in the base directory, 
-running the first example from the command line would look this this
+running the first example from the command line would look this this:
 
 > ./run.sh features/1-let-const.js
 
-`run.sh` switches on all ES6 features of `io.js` even when they are not mature, yet.
+Note: `run.sh` automatically switches on all [ES6 features](https://iojs.org/es6.html) of `io.js` even when they are not mature, yet.
 
 In the `workshop` folder you can try the new features on a complete example.
 
@@ -70,7 +70,7 @@ for (let i in programmers) {
     console.log(i);
 }
 
-// ... while this ES6 features iterates over the elements (what you probably desire)
+// ... while this ES6 feature iterates over the elements (what you probably desire)
 for (let p of programmers) {
     console.log(p);
 }
@@ -78,7 +78,7 @@ for (let p of programmers) {
 
 ### Template strings
 
-Using template strings you can embed expressions into them and let them span multiple lines.
+Using template strings you can embed expressions into strings and let them span multiple lines. They are enclosed by back tics (``) instead of quotation marks.
 
 ```JavaScript
 const a = 5;
@@ -94,10 +94,9 @@ not ${2 * a + b}.`);
 
 ### Arrow functions
 
-Arrow functions offer a shorter function syntax and a lexical `this`. This means `this` is inside the arrow function
-is bound to the value `this` had in the scope the function was defined in. 
+Arrow functions offer both a shorter function syntax and a lexical `this`. The latter means that `this` inside the arrow function is bound to the value `this` had in the scope the function was defined in. 
 
-Unfortunately, only shorter syntax works in `io.js` so far. Even that you have to enable using `--harmony_arrow_functions`
+Unfortunately, only the shorter syntax works in `io.js` so far. And even have to enable it using the `--harmony_arrow_functions`
 flag.
 
 ```JavaScript
@@ -117,7 +116,7 @@ console.log(es6()); // 10
 const es6_short = () => 10;
 console.log(es6_short()) // 10
 
-// basic syntax does work, but no automatic binding to this
+// In io.js currently only basic syntax does work, but no automatic binding to this
 const obj = {
     methodOfObj: function () {
         return () => this;
