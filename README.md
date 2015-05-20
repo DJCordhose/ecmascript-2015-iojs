@@ -174,10 +174,9 @@ And it is even possible to use property names that are defined dynamically using
 
 ```JavaScript
 function secretKey() {
-	return 'sixsixsix';
+	return 666;
 }
 
-// Only with: --harmony-computed-property-names
 const obj = {
 	[ 'prop_' + secretKey() ]: 'Number of the beast'
 }
