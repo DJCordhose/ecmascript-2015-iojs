@@ -121,14 +121,15 @@ console.log(es6()); // 10
 const es6_short = () => 10;
 console.log(es6_short()) // 10
 
-// In io.js currently only basic syntax does work, but no automatic binding to this
+// basic syntax works in io.js, but no automatic binding to this
 const obj = {
     methodOfObj: function () {
-        return () => this;
+        ['1', '2', '3'].forEach( (e) => {
+           console.log(obj === this); // true in firefox, false in io.js
+        });
     }
 };
 
-// true in firefox, false in io.js
-console.log(obj.methodOfObj()() === obj);
+obj.methodOfObj();
 ```
 

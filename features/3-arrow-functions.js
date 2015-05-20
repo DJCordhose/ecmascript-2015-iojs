@@ -19,9 +19,10 @@ console.log(es6_short()) // 10
 // basic syntax does work, but no automatic binding to this
 const obj = {
     methodOfObj: function () {
-        return () => this;
+        ['1', '2', '3'].forEach( (e) => {
+           console.log(obj === this); // true in firefox, false in io.js
+        });
     }
 };
 
-// true in firefox, false in io.js
-console.log(obj.methodOfObj()() === obj);
+obj.methodOfObj();
