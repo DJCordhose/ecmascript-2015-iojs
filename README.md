@@ -22,10 +22,13 @@ Note: `run.sh` automatically switches on all [ES6 features](https://iojs.org/es6
 In the `workshop` folder you can try the new features on a complete example.
 
 io.is (partially) supports the following new features:
-- [let + const](#let--const)
-- [for..of](#forof)
-- [template strings](#template-strings)
-- [arrow functions](#arrow-functions)
+
+Feature                               | Cmd line switch needed to enable
+------------------------------------- | --------------------------------
+[let + const](#let--const)            | already enabled
+[for..of](#forof)                     | already enabled
+[template strings](#template-strings) | already enabled
+[arrow functions](#arrow-functions)   | `--harmony_arrow_functions`
 
 ### Let + Const
 Blocks now create scopes for `let` and `const`. Semantics of `var` remain unchanged.
@@ -94,9 +97,9 @@ not ${2 * a + b}.`);
 
 ### Arrow functions
 
-Arrow functions offer both a shorter function syntax and a lexical `this`. The latter means that `this` inside the arrow function is bound to the value `this` had in the scope the function was defined in. 
+Arrow functions offer both a shorter function syntax and a lexical `this`. The latter means that `this` inside the arrow function is bound to the value `this` had in the scope, the function was defined in. 
 
-Unfortunately, only the shorter syntax works in `io.js` so far. And even have to enable it using the `--harmony_arrow_functions`
+Unfortunately, only the shorter syntax works in `io.js` so far. And even therefore you have to enable it using the `--harmony_arrow_functions`
 flag.
 
 ```JavaScript
