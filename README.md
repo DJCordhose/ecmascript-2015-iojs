@@ -32,6 +32,7 @@ Feature                                               | Command line switch need
 [template strings](#template-strings)                 | already enabled
 [arrow functions](#arrow-functions)                   | `--harmony_arrow_functions`
 [enhanced object literal](#enhanced-object-literal)   | already enabled (`--harmony-computed-property-names` for computed property names)                 
+[keyed collections](#keyed-collections)               | already enabled
 
 
 ### Let + Const
@@ -183,5 +184,81 @@ const obj = {
 console.log(obj.prop_666); // Number of the beast
 ```
 
+### Keyed Collections
 
+ES6 offers two new data structures and two variations of them: `Map`, `Set`, and `WeakMap` and `WeakSet` as their weak
+variants. A `Map` can store a references from a key to value, much like an object, but more flexible. E.g. it can
+use any value as a key, not only a string.
+
+```JavaScript
+const map = new Map();
+
+// keys are not restricted to strings
+const KEY1 = {name: 'KEY1'};
+const KEY2 = 'KEY2';
+
+map.set(KEY1, 1);
+console.log(map.get(KEY1)); // 1
+console.log(map.has(KEY1)); // true
+
+map.set(KEY2, 2);
+console.log(map.size); // 2
+
+// maps are iterable objects
+for (let e of map) {
+    console.log(e); // array consisting of key and value, e.g. [ { name: 'KEY1' }, 1 ]
+}
+
+for (let e of map.keys()) {
+    console.log(e); // keys only
+}
+
+for (let e of map.values()) {
+    console.log(e); // values only
+}
+
+map.delete(KEY1);
+console.log(map.has(KEY1)); // false
+```
+
+`Sets` only store values, disallowing doubles, but still keeping order. In some usecases they might be a replacement 
+for arrays. 
+
+```JavaScript
+const set = new Set();
+
+const VALUE1 = {name: 'VALUE1'};
+const VALUE2 = 'VALUE2';
+
+set.add(VALUE1);
+console.log(set.has(VALUE1)); // true
+
+set.add(VALUE2);
+console.log(set.size); // 2
+
+// sets are iterable objects
+for (let e of set) {
+    console.log(e);
+}
+
+set.delete(VALUE1);
+console.log(set.has(VALUE1)); // false
+```
+
+`WeakMap` and `WeakSet` are weak variants of `Map` and `Set`. Entries in `WeakMap` and `WeakSet` are only 
+valid as long as their keys (for maps) or values (for sets) still live, that is they are not collected by garbage collection.   
+As a result of that they come with a limited API that only allows to get, set, test, and delete. They are not iterable.
+Keys (for maps) or values (for sets) can only be objects. 
+
+A usecase would be to store additional information for a DOM node and as soon as this node is garbage collection, 
+the additional information disappears from the `WeakMap`.
+
+```JavaScript
+const weakMap = new WeakMap();
+let domNode = {}; // this is not a real dom node, of course
+weakMap.set(domNode, 'additional information');
+domNode = null;
+// it is impossible to use `has` to find out if the entry is still in the `WeakMap`, because we no longer have a reference
+// to the key. But once the garbage collection has run, it will be gone
+```
 
