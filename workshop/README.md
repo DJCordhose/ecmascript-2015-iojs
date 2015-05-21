@@ -33,14 +33,13 @@ Explain ES5 and its pain points
 
 ## Step 3: There is more
 
-* Iterable, Symbol, Generator: iterator for programmers using generators?
-* Promises?
+Just show more features from the `features` folder or `README`.
 
 # Schedule
 
 Workshop takes approx. 45 minutes
 
-* Set Up (10 minutes): Install io.js 2.0 and clone this repo, execute first script using io.js
+* Set Up (5 minutes): Install io.js 2.0 and clone this repo, execute first script using io.js
 * Step-0 (5 minutes)
 * Step-1 (max. 15 minutes)
 * Step-2 (max. 15 minutes)
@@ -48,4 +47,4 @@ Workshop takes approx. 45 minutes
 
 # Links
 * https://iojs.org/en/es6.html
-* http://kangax.github.io/compat-table/es6/
+* http://kangax.github.io/compat-table/es6/#iojs

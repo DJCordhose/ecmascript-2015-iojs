@@ -33,6 +33,6 @@ for (let p of programmers) {
 
 // or
 
-programmers.forEach((p) => console.log(p.code()));
+programmers.forEach(p => console.log(p.code()));
 
 console.log(typeof p);
