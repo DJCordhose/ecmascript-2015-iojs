@@ -1,3 +1,14 @@
+let a = 10
+let b = 20
+
+let obj = {
+    a,
+    b
+}
+
+console.log(obj)
+
+/*
 const obj = {
     methodOfObj: function() {
         return () => this;
@@ -5,6 +16,7 @@ const obj = {
 };
 
 console.log(obj.methodOfObj()() === obj);
+*/
 /*
 'use strict'
 
