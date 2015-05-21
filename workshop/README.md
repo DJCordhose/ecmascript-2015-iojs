@@ -33,7 +33,7 @@ Explain ES5 and its pain points
 
 ## Step 3: There is more
 
-Just show more features from the `features` folder or `README`.
+Just show more features based on peoples interest or give a complete overview.
 
 # Schedule
 
