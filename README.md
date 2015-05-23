@@ -33,6 +33,7 @@ Feature                                               | Command line switch need
 [arrow functions](#arrow-functions)                   | `--harmony_arrow_functions`
 [enhanced object literal](#enhanced-object-literal)   | already enabled (`--harmony-computed-property-names` for computed property names)                 
 [keyed collections](#keyed-collections)               | already enabled
+[classes](#classes)                                   | already enabled (`--harmony-computed-property-names` for computed property names)     
 
 
 ### Let + Const
@@ -182,6 +183,124 @@ const obj = {
 	[ 'prop_' + secretKey() ]: 'Number of the beast'
 }
 console.log(obj.prop_666); // Number of the beast
+```
+### Classes
+
+Beside the enhancements to the object literal ES6 also provide a new simplified way to write object-oriented code: classes.
+Instead of using an object literal to define and inherit classes you can now use the dedicated `class` keyword. Within
+classes you can specify a constructor and instance and static members and You can define getters and setters for your properties.
+Inheritance is supported using the `extends` keyword.
+
+Let's have a first look at a fairly simple class:
+```JavaScript
+class Person {
+	constructor(name) {
+		this.name = name;
+	}
+
+	toString() {
+		return `I'm ${this.name}`;
+	}
+}
+
+// create new instance of that class
+const lemmy = new Person('Lemmy');
+
+// access it's members
+console.log(lemmy.toString()); // I'm Lemmy
+console.log(lemmy.name); // 'Lemmy'
+```
+
+Now lets add `getter and setter` functions:
+```JavaScript
+class Person {
+	constructor(name) {
+		this.name = name;
+		this._id = name.toLowerCase();
+	}
+
+	// read only property, note that the setter is missing
+	get id() {
+		return this._id;
+	}
+
+	// Example: getter and setters
+	set password(password) {
+		// store 'encrypted' password
+		this.encryptedPassword = password.split('').reverse().join('');
+	}
+
+	get password() {
+		// return 'decrypted' password
+		return this.encryptedPassword.split('').reverse().join('');
+	}
+
+	toString() {
+		return `I'm ${this.name}`;
+	}
+}
+
+const lemmy = new Person('Lemmy');
+
+// get the read-only property 'id'
+console.log(lemmy.id); // 'lemmy'
+
+// Try setting a read-only property
+try {
+	// Won't work, as id is a read-only property
+	lemmy.id = 'kilmister';
+} catch (e) {
+	// ERROR: TypeError: Cannot set property id of [object Object] which has only a getter
+	console.log(e);
+}
+
+lemmy.password = 'aceOfSpades';
+console.log(lemmy.password); // aceOfSpades
+console.log(lemmy.encryptedPassword); //sedapSfOeca
+```
+
+And finally let's introduce class inheritance using the `extends` keyword:
+```JavaScript
+class Musician extends Person {
+	constructor(name, instrument) {
+		// invoke super constructor first
+		super(name);
+		this.instrument = instrument;
+	}
+
+	toString() {
+		return `${super.toString()} and I'm playing ${this.instrument}`;
+	}
+
+	// You can define static methods
+	static newGuitarPlayer(name) {
+		return new Musician(name, 'Guitar');
+	}
+}
+
+const mikkey = new Musician('Mikkey', 'Drums');
+console.log(mikkey.toString()); // I'm Mikkey and I'm playing Drums
+console.log((mikkey instanceof Person)); // true
+console.log((mikkey instanceof Musician)); // true
+console.log(Musician.newGuitarPlayer('Phil').toString()); // I'm Phil and I'm playing Guitar
+```
+
+And as with the object literal you can even use computed property names in your class. Note that you have to enable this feature
+with the `--harmony-computed-property-names` flag when running iojs:
+
+```JavaScript
+function secretKey() {
+	return 667;
+}
+
+class NeighbourHood {
+	[ 'no_' + secretKey() ]() {
+		return 'Neighbour of the beast';
+	}
+}
+
+const hood = new NeighbourHood();
+console.log(hood.no_667()); // Neighbour of the beast
 ```
 
 ### Keyed Collections
