@@ -34,7 +34,9 @@ Feature                                               | Command line switch need
 [enhanced object literal](#enhanced-object-literal)   | already enabled (`--harmony-computed-property-names` for computed property names)                 
 [keyed collections](#keyed-collections)               | already enabled
 [classes](#classes)                                   | already enabled (`--harmony-computed-property-names` for computed property names)     
-
+Destructuring                                         | not supported
+Default values                                        | not supported
+Spread operator                                       | not supported
 
 ### Let + Const
 Blocks now create scopes for `let` and `const`. Semantics of `var` remain unchanged.
