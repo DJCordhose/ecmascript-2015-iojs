@@ -33,7 +33,8 @@ Feature                                               | Command line switch need
 [arrow functions](#arrow-functions)                   | `--harmony_arrow_functions`
 [enhanced object literal](#enhanced-object-literal)   | already enabled (`--harmony-computed-property-names` for computed property names)                 
 [keyed collections](#keyed-collections)               | already enabled
-[classes](#classes)                                   | already enabled (`--harmony-computed-property-names` for computed property names)     
+[classes](#classes)                                   | already enabled (`--harmony-computed-property-names` for computed property names)   
+[rest parameters](#rest-parameters)                   | `--harmony-rest-parameters`
 Destructuring                                         | not supported
 Default values                                        | not supported
 Spread operator                                       | not supported
@@ -386,3 +387,23 @@ domNode = null;
 // to the key. But once the garbage collection has run, it will be gone
 ```
 
+### Rest parameters
+In ECMAScript 5 you can access all parameters that have been passed to a function using the special Array-like `arguments` object. In ES6
+you can specify the last parameter of your function to be a `rest parameter` (using triple dot notation). This parameter collects
+all ("the rest") parameters that have been passed to the method but have not been explicitly specified as arguments. In contrast
+to the `arguments` object the rest parameter is a real JavaScript Array, so it's much easier to use.
+Please make sure, that you enable the rest parameter with the switch `--harmony-rest-parameters`.
+
+```JavaScript
+function sendMessage(message, ...recipients) {
+	// Note that recipients is a standard Array, you can immediately use all Array functions  
+	// The first argument ('message') is not part of that array, as it is declared as this functions' argument
+	recipients.sort().forEach((recipient) => {
+		console.log(`${recipient}, ${message}`)
+	});
+}
+
+sendMessage('Keep on rocking!', 'Lemmy', 'Ozzy', 'Angus');
+```
+
+(Note that ES6 also introduces the spread operator that also starts with `...`. This operator is currently not supported by iojs)
