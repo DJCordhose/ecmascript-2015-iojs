@@ -8,16 +8,16 @@
 
 # Assignment
 
-programmer-step0.js written in ES5, convert it to ES6
+'workshop/step0-es5/programmer-step0.js' is written in ES5, convert it to ES6
 
 # Format
 
 Instructor explains a new ES6 concept, supported by io.js and students apply it to example.
-By doing so they incrementally transform the ES5 example into ES6.
+By doing so we incrementally transform the ES5 example into ES6.
 
 ## Step 0
 
-Explain ES5 and its pain points
+Explain ES5 version and its pain points
 
 ## Step 1: Basic stuff
 
@@ -33,7 +33,7 @@ Explain ES5 and its pain points
 
 ## Step 3: There is more
 
-Just show more features based on peoples interest or give a complete overview.
+Just show more features based on peoples interest or give a broader overview.
 
 # Schedule
 
