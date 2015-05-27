@@ -35,6 +35,7 @@ Feature                                               | Command line switch need
 [keyed collections](#keyed-collections)               | already enabled
 [classes](#classes)                                   | already enabled (`--harmony-computed-property-names` for computed property names)   
 [rest parameters](#rest-parameters)                   | `--harmony-rest-parameters`
+[Promise](#promise)                                   | already enabled
 Destructuring                                         | not supported
 Default values                                        | not supported
 Spread operator                                       | not supported
@@ -410,3 +411,60 @@ sendMessage('Keep on rocking!', 'Lemmy', 'Ozzy', 'Angus');
 *Caution: Unfortunately, rest parameters do not work in combination with arrow functions.*
 
 (Note that ES6 also introduces the spread operator that also starts with `...`. This operator is currently not supported by iojs)
+
+### Promise
+
+Promises are a general concept to chain together operations in asynchronous or deferred scenarios. 
+A typical example would be a call to a server or a timed or background operation. 
+
+First we create such a promise that carries out a deferred operation after one second.
+
+```JavaScript
+const promise = new Promise((resolve, reject) => {
+    const resolvedValue = 'Result from promise';
+    console.log('Promise initialized');
+    setTimeout(() => {
+        console.log('Promise resolved')
+        resolve(resolvedValue)
+    }, 1000);
+});
+// Output:
+//Promise initialized
+//Promise resolved
+```
+
+To create such a promise we call the constructor and pass in a function that takes two callbacks - one to
+successfully resolve the promise and another to make it fail. In this case we call the resolve callback
+to make it succeed after one second. We have thus created a promise that simply returns the string 
+`Result from promise` after a second. 
+
+This only makes sense if we chain another operation to the promise to make use of the returned value. Just imagine
+the value has been calculated using a complex background calculation to make it more realistic. We chain together
+operations using the `then` method. It takes a callback function as an argument that will be called once the value
+of the promise is resolved.
+
+```JavaScript
+const promise2 = promise.then(value => {
+    console.log(`Value passed into then: ${value}`); // Value passed into then: Result from promise
+    return `${value} plus stuff`;
+});
+```
+
+In this case we return a new value based on the first one and the `then` method will create a new promise based on that.
+This means we can chain another operation to this, that might just log out the new value:
+ 
+```JavaScript
+promise2.then(console.log); // Result from promise plus stuff
+```
+
+This is a little bit like a programmable semicolon, as we chain together statements using the special semantics
+of a promise.
+
+*Note for people with a background in functional programming: A JavaScript `Promise` forms a 
+[monad](http://en.wikipedia.org/wiki/Monad_(functional_programming)). 
+`then' would be the `bind` operation. Because of this you can also return a `Promise` from the `then` method and
+not only a plain value.
+And the `return` operation would be the `Promise` constructor in combination with the `resolve` method
+or [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+as a shortcut of this.* 
+

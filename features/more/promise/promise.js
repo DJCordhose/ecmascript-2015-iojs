@@ -1,4 +1,4 @@
-const promise = new Promise((resolve) => {
+const promise = new Promise((resolve, reject) => {
     console.log('First promise initialized')
     setTimeout(() => resolve(0), 1000)
 })
