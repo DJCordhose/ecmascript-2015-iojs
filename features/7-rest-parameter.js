@@ -28,3 +28,18 @@
 
 	sendMessage('Keep on rocking!', 'Lemmy', 'Ozzy', 'Angus');
 }
+
+// ES6 fat arrow with rest parameters, not supported yet in io.js
+{
+	// error in io.js, works fine in firefox
+/*
+	const sendMessage = (message, ...recipients) => {
+		// Note that recipients is a standard Array.
+		recipients.sort().forEach((recipient) => {
+			console.log(`${recipient}, ${message}`)
+		});
+	}
+	sendMessage('Keep on rocking!', 'Lemmy', 'Ozzy', 'Angus');
+*/
+
+}

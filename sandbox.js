@@ -1,12 +1,15 @@
-let a = 10
-let b = 20
+// ES6 fat arrow with rest parameters, not supported yet in io.js
+{
+    // error in io.js, works in firefox
+    const sendMessage = (message, ...recipients) => {
+        // Note that recipients is a standard Array.
+        recipients.sort().forEach((recipient) => {
+            console.log(`${recipient}, ${message}`)
+        });
+    }
+    sendMessage('Keep on rocking!', 'Lemmy', 'Ozzy', 'Angus');
 
-let obj = {
-    a,
-    b
 }
-
-console.log(obj)
 
 /*
 const obj = {

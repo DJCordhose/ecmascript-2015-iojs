@@ -33,5 +33,6 @@ let domNode = {}; // this is not a real dom node, of course
 weakSet.add(domNode);
 console.log(weakSet.has(domNode)); // true
 domNode = null;
-// it is impossible to use `has` to find out if the domNode is still in the `WeakSet`, because we no longer have a reference
+// it is impossible to use `has` to find out if the domNode is still in the `WeakSet`,
+// because we no longer have a reference
 // to the domNode. But once the garbage collection has run, it will be gone

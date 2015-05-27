@@ -383,7 +383,8 @@ const weakMap = new WeakMap();
 let domNode = {}; // this is not a real dom node, of course
 weakMap.set(domNode, 'additional information');
 domNode = null;
-// it is impossible to use `has` to find out if the entry is still in the `WeakMap`, because we no longer have a reference
+// it is impossible to use `has` to find out if the entry is still in the `WeakMap`,
+// because we no longer have a reference
 // to the key. But once the garbage collection has run, it will be gone
 ```
 
@@ -405,5 +406,7 @@ function sendMessage(message, ...recipients) {
 
 sendMessage('Keep on rocking!', 'Lemmy', 'Ozzy', 'Angus');
 ```
+
+*Caution: Unfortunately, rest parameters do not work in combination with arrow functions.*
 
 (Note that ES6 also introduces the spread operator that also starts with `...`. This operator is currently not supported by iojs)

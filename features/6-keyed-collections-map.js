@@ -49,5 +49,6 @@ let domNode = {}; // this is not a real dom node, of course
 weakMap.set(domNode, 'additional information');
 console.log(weakMap.get(domNode) === 'additional information'); // true
 domNode = null;
-// it is impossible to use `has` to find out if the entry is still in the `WeakMap`, because we no longer have a reference
+// it is impossible to use `has` to find out if the entry is still in the `WeakMap`,
+// because we no longer have a reference
 // to the key. But once the garbage collection has run, it will be gone
