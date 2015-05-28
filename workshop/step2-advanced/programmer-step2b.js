@@ -1,9 +1,14 @@
+// TODO: how to put this into a block to make nameSymbol really private?
+const nameSymbol = Symbol()
+
 class Person {
+
     constructor(name) {
-        this._name = name;
+        this[nameSymbol] = name
     }
+
     get name() {
-        return this._name;
+        return this[nameSymbol]
     }
 }
 

@@ -8,7 +8,7 @@ class Person {
         this[nameSymbol] = name
     }
 
-    getName() {
+    get name() {
         return this[nameSymbol]
     }
 }
@@ -17,7 +17,7 @@ console.log(typeof nameSymbol)
 
 const olli = new Person("Olli")
 
-console.log(olli.getName())
+console.log(olli.name)
 
 console.log(olli[nameSymbol])
 

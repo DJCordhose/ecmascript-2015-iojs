@@ -8,7 +8,11 @@ function* idMaker() {
 
 var gen = idMaker();
 
-console.log(gen.next());
-console.log(gen.next());
-console.log(gen.next());
-console.log(gen.next());
+//console.log(gen.next());
+//console.log(gen.next());
+//console.log(gen.next());
+//console.log(gen.next());
+//
+for (let n of gen) {
+    console.log(n);
+}

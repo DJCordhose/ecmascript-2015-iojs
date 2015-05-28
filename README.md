@@ -36,9 +36,12 @@ Feature                                               | Command line switch need
 [classes](#classes)                                   | already enabled (`--harmony-computed-property-names` for computed property names)   
 [rest parameters](#rest-parameters)                   | `--harmony-rest-parameters`
 [Promise](#promise)                                   | already enabled
+[iterators and generators](#iterators-and-generators) | already enabled
 Destructuring                                         | not supported
 Default values                                        | not supported
 Spread operator                                       | not supported
+Proxy and Reflect                                     | not supported
+tail call optimisation                                | not supported
 
 ### Let + Const
 Blocks now create scopes for `let` and `const`. Semantics of `var` remain unchanged.
@@ -479,11 +482,10 @@ Promise
 
 Additionally, `io.js` allows you to [catch all unhandled errors from promises](http://blog.modulus.io/promise-errors-in-iojs)
 
-*Note for people with a background in functional programming: A JavaScript `Promise` forms a 
+*Note for people with a background in functional programming: A JavaScript `Promise` is a bit like a 
 [monad](http://en.wikipedia.org/wiki/Monad_(functional_programming)). 
-`then` would be the `bind` operation. Because of this you can also return a `Promise` from the `then` method and
-not only a plain value.
-And the `return` operation would be the `Promise` constructor in combination with the `resolve` method
+`then` would be the `bind` operation. And the `return` operation would be the `Promise` constructor in combination with the `resolve` method
 or [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
 as a shortcut of this.* 
 
+### Iterators and Generators
