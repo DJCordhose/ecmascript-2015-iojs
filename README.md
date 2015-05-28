@@ -489,14 +489,14 @@ as a shortcut of this.*
 ### Iterators and Generators
 
 [for..of as described above](#forof) can iterate over every object that is `iterable`. An object is `iterable`
-if it has a method that returns an `iterator`. This method does not have a name, but is 
+if it has a method that returns an `iterator`. This `iterator`-method does not have a name, but is 
 accessed using the well known symbol `Symbol.iterator`. 
 The returned `iterator` is an object that has a method called `next`. 
 The return value is another object that has a `value` property, 
 plus a boolean 'done' property that indicates if there are still more values to iterate over.
  
 Ok, this gets a little involved, let us see some code to create such an `iterable`. This `iterable` can
-create as name unique names as you want by using `name` as prefix and adding a count to it:
+provide us with unique names by using `name` as prefix and adding a count to it:
 
 ```JavaScript
 const uniqueNamesIterable = {
@@ -515,7 +515,7 @@ const uniqueNamesIterable = {
 ```
 
 `for..of` will initially create an `iterator` by calling the method behind `Symbol.iterator` and will then
-call `next` on that `iterator` with every iteration.
+call `next` on that `iterator` with every iteration:
 
 ```JavaScript
 for (let name of uniqueNamesIterable) {
@@ -529,7 +529,7 @@ for (let name of uniqueNamesIterable) {
 // name2
 ```
 
-We can simulate this behavior by doing it manually:
+For transparency, we can simulate this behavior by doing the same thing manually:
 
 ```JavaScript
 const iterator = uniqueNamesIterable[Symbol.iterator]();
@@ -540,15 +540,16 @@ console.log(iterator.next());
 // { done: false, value: 'name1' }
 ```
 
+As long as 'done' is false, `for..of` will keep on going.
+
 *Note: The spread operator `...` - which has not been implemented in io.js, yet - uses the same 
 protocol to enumerate all values of an `iterable`.* 
 
-Generators can help to simplify this, by reducing a bit of boiler plate code. The generator both creates the
-`iterator` and supplies its implementation. You no longer provide a `next`-method, but rather implement the 
-generator in a sequential style. Instead of `return` you use `yield` to provide values for iteration. 
+Generators can help to simplify this by reducing a bit of boiler plate code. A generator both creates the
+`iterator` and supplies its implementation. To indicate that a function is a generator, 
+you use the `function*` declaration.
 
-You pay for this with some obscure new syntax, though. This code does the same thing as the example before. Note
-that generator functions use the `function*` declaration.
+This code does the same thing as the example before:
 
 ```JavaScript
 const uniqueNamesIterable = {
@@ -562,3 +563,7 @@ const uniqueNamesIterable = {
     }
 };
 ```
+
+You no longer have to provide a `next`-method, but rather implement the 
+generator in a sequential style. Instead of using return you use `yield` to provide values for iteration. 
+The generator can also determine if we are done, yet, so you do not have to provide that information yourself.
