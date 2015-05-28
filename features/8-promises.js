@@ -1,3 +1,4 @@
+// http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
 // creates a promise for a deferred operation that is resolved after 1 second
@@ -18,7 +19,4 @@ const promise2 = promise.then(value => {
     return `${value} plus stuff`;
 });
 
-const promise3 = promise2.then(console.log); // Result from promise plus stuff
-const promise4 = promise3.then({
-
-});
+promise2.then(console.log); // Result from promise plus stuff

@@ -408,16 +408,16 @@ function sendMessage(message, ...recipients) {
 sendMessage('Keep on rocking!', 'Lemmy', 'Ozzy', 'Angus');
 ```
 
-*Caution: Unfortunately, rest parameters do not work in combination with arrow functions.*
+*Caution: Unfortunately, rest parameters do not work in combination with arrow functions in `io.js`, yet.*
 
 (Note that ES6 also introduces the spread operator that also starts with `...`. This operator is currently not supported by iojs)
 
 ### Promise
 
 Promises are a general concept to chain together operations in asynchronous or deferred scenarios. 
-A typical example would be a call to a server or a timed or background operation. 
+A typical example would be a call to a server or a timed execution or a background calculation. 
 
-First we create such a promise that carries out a deferred operation after one second.
+As an example, we first create such a promise that carries out a deferred operation after one second.
 
 ```JavaScript
 const promise = new Promise((resolve, reject) => {
@@ -460,9 +460,28 @@ promise2.then(console.log); // Result from promise plus stuff
 This is a little bit like a programmable semicolon, as we chain together statements using the special semantics
 of a promise.
 
+You can catch errors using the `catch` method. Once an explicit rejection or an error occurs, the cause will be
+passed into the function provided:
+
+```JavaScript
+Promise
+    //.resolve(10) // creates and directly resolves promise
+    .reject('kaputt') // creates and directly rejects promise
+    .then(x => {
+        console.log(x);
+        throw Error('Something went wrong');
+    })
+    .then(() => {
+        console.log('This will not be printed when rejected or an error occurred before');
+    })
+    .catch(e => console.log('error: ', e))
+```
+
+Additionally, `io.js` allows you to [catch all unhandled errors from promises](http://blog.modulus.io/promise-errors-in-iojs)
+
 *Note for people with a background in functional programming: A JavaScript `Promise` forms a 
 [monad](http://en.wikipedia.org/wiki/Monad_(functional_programming)). 
-`then' would be the `bind` operation. Because of this you can also return a `Promise` from the `then` method and
+`then` would be the `bind` operation. Because of this you can also return a `Promise` from the `then` method and
 not only a plain value.
 And the `return` operation would be the `Promise` constructor in combination with the `resolve` method
 or [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
