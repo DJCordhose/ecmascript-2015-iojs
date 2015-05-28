@@ -73,13 +73,11 @@ console.log(x);
 
 ### For..Of
 Instead of iterating of the index using `for..in`, you can now directly iterate over the elements in an array using
-`for..of`. `for..of` not only works for arrays, but for every object that is `iterable`. We will explain later
- what being `iterable` means.
+`for..of`. `for..of` not only works for arrays, but for every object that is `iterable`. 
+[We will explain later what being `iterable` means](#iterators-and-generators).
 
 ```JavaScript
-const programmers = [];
-programmers.push('Granny');
-programmers.push('Olli');
+const programmers = ['Granny', 'Olli'];
 
 // this iterates over the indices ...
 // outputs 0, 1
@@ -489,3 +487,78 @@ or [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
 as a shortcut of this.* 
 
 ### Iterators and Generators
+
+[for..of as described above](#forof) can iterate over every object that is `iterable`. An object is `iterable`
+if it has a method that returns an `iterator`. This method does not have a name, but is 
+accessed using the well known symbol `Symbol.iterator`. 
+The returned `iterator` is an object that has a method called `next`. 
+The return value is another object that has a `value` property, 
+plus a boolean 'done' property that indicates if there are still more values to iterate over.
+ 
+Ok, this gets a little involved, let us see some code to create such an `iterable`. This `iterable` can
+create as name unique names as you want by using `name` as prefix and adding a count to it:
+
+```JavaScript
+const uniqueNamesIterable = {
+    [Symbol.iterator]() {
+        let count = 0;
+        const prefix = 'name';
+        const iterator = {
+            next() {
+                const value = prefix + count++;
+                return {done: false, value};
+            }
+        };
+        return iterator;
+    }
+};
+```
+
+`for..of` will initially create an `iterator` by calling the method behind `Symbol.iterator` and will then
+call `next` on that `iterator` with every iteration.
+
+```JavaScript
+for (let name of uniqueNamesIterable) {
+    // we just want three names
+    if (name.endsWith('3')) break;
+    console.log(name);
+}
+// outputs:
+// name0
+// name1
+// name2
+```
+
+We can simulate this behavior by doing it manually:
+
+```JavaScript
+const iterator = uniqueNamesIterable[Symbol.iterator]();
+console.log(iterator.next());
+console.log(iterator.next());
+// outputs:
+// { done: false, value: 'name0' }
+// { done: false, value: 'name1' }
+```
+
+*Note: The spread operator `...` - which has not been implemented in io.js, yet - uses the same 
+protocol to enumerate all values of an `iterable`.* 
+
+Generators can help to simplify this, by reducing a bit of boiler plate code. The generator both creates the
+`iterator` and supplies its implementation. You no longer provide a `next`-method, but rather implement the 
+generator in a sequential style. Instead of `return` you use `yield` to provide values for iteration. 
+
+You pay for this with some obscure new syntax, though. This code does the same thing as the example before. Note
+that generator functions use the `function*` declaration.
+
+```JavaScript
+const uniqueNamesIterable = {
+    [Symbol.iterator]: function* () {
+        let count = 0;
+        const prefix = 'name';
+        while (true) {
+            const value = prefix + count++;
+            yield value;
+        }
+    }
+};
+```

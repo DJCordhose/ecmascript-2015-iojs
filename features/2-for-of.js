@@ -1,8 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
 
-const programmers = [];
-programmers.push('Granny');
-programmers.push('Olli');
+const programmers = ['Granny', 'Olli'];
 
 // this iterates over the indices ...
 // outputs 0, 1
