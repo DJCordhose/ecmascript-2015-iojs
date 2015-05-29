@@ -489,40 +489,29 @@ as a shortcut of this.*
 
 ### Symbol
 
-ES6 introduced a new primitive datatype `symbol` and it's wrapper type `Symbol`. Using symbols you can create unique "identifiers". Its main use case is to serve as an identifier for object properties.
+ES6 introduced a new primitive datatype `symbol`. Using symbols you can create unique "identifiers" as each symbol is unique and immutable:
 
-
-Using symbols instead of strings allows you to implement private methods of properties. Let's compare two versions, first using a version without Symbols:
-```JavaScript
-const Person = () => { // IIFE using arrow function
-    // private
-    const nameProperty = 'PRIVATE_PROPERTY_NAME';
-   
-    class Person {
-
-        constructor(name) {
-            this[nameProperty] = name;
-        }
-
-        get name() {
-            return this[nameProperty];
-        }
-    }
-
-    return Person;
-}();
-
-const olli = new Person("Olli");
-
-console.log(olli.name); // Olli
 ```
-Implementing the private property this way still makes it easy to access it, as we can read the value of "propertyName" and use it to access the property:
-```JavaScript
-const lilo = new Person("Lilo");
-console.log(lilo[PRIVATE_PROPERTY_NAME]); // Lilo
+JavaScript
+
+const one = Symbol();
+const two = Symbol();
+console.log(one === two); // false
 ```
 
-Now let's rewrite the example to make it at least harder to access our private property:
+For debugging purposes you can add a description to a symbol:
+```JavaSCript
+
+const one = Symbol('My symbol');
+const two = Symbol('Another symbol);
+
+// Even two symbols with different descriptions are unique:
+const good = Symbol('mood');
+const bad = Symbol('mood');
+console.log(good === bad); // false
+```
+
+Its main use case is to serve as an identifier for object properties. Using symbols instead of strings allows you to implement private properties:
 
 ```JavaScript
 const Person = () => { // IIFE using arrow function
