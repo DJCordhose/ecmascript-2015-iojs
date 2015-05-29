@@ -500,7 +500,7 @@ console.log(one !== two); // true
 For debugging purposes you can add a description to a symbol:
 ```JavaScript
 const one = Symbol('My symbol');
-const two = Symbol('Another symbol);
+const two = Symbol('Another symbol');
 
 // Even two symbols with the same description are unique:
 const good = Symbol('mood');
