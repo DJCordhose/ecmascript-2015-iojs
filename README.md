@@ -462,24 +462,46 @@ promise2.then(console.log); // Result from promise plus stuff
 This is a little bit like a programmable semicolon, as we chain together statements using the special semantics
 of a promise.
 
-You can catch errors using the `catch` method. Once an explicit rejection or an error occurs, the cause will be
-passed into the function provided:
+You can catch errors using the `catch` method. Once an explicit rejection or an error occurs, the cause will be passed into the function provided. 
+```JavaScript
+// Fail with reject:
+const promise = new Promise((resolve, reject) => {
+    console.log('Promise initialized');
+    setTimeout(() => {
+        reject("Something really bad happened");
+    }, 1000);
+})
+.catch( (e) => console.log("ERROR: ", e)); // ERROR: Something really bad happened
 
+// Fail with an Exception:
+const promise = new Promise((resolve, reject) => {
+    const resolvedValue = 'Result from promise';
+    console.log('Promise initialized');
+    setTimeout(() => {
+        console.log('Promise resolved')
+        resolve(resolvedValue)
+    }, 1000);
+}).then((x) => {
+	console.log(x);
+    throw Error('Something went wrong');
+})
+.then(() => {
+    console.log('This will not be printed when rejected or an error occurred before');
+})
+.catch(e => console.log('error: ', e));
+```
+Additionally, `io.js` allows you to [catch all unhandled errors from promises](http://blog.modulus.io/promise-errors-in-iojs)
+
+You can also create a Promise for a value that already exists and resolve or reject it immediately by using the `reject` or `resolve` methods:
 ```JavaScript
 Promise
-    //.resolve(10) // creates and directly resolves promise
-    .reject('kaputt') // creates and directly rejects promise
-    .then(x => {
-        console.log(x);
-        throw Error('Something went wrong');
-    })
-    .then(() => {
-        console.log('This will not be printed when rejected or an error occurred before');
+    .resolve('Hello') // creates and directly resolves promise
+    //.reject('kaputt') // would create and directly reject promise
+    .then(value => {
+        return `${value}, World`;
     })
     .catch(e => console.log('error: ', e))
 ```
-
-Additionally, `io.js` allows you to [catch all unhandled errors from promises](http://blog.modulus.io/promise-errors-in-iojs)
 
 *Note for people with a background in functional programming: A JavaScript `Promise` is a bit like a 
 [monad](http://en.wikipedia.org/wiki/Monad_(functional_programming)). 
