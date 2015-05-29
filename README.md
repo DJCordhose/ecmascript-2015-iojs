@@ -491,24 +491,21 @@ as a shortcut of this.*
 
 ES6 introduced a new primitive datatype `symbol`. Using symbols you can create unique "identifiers" as each symbol is unique and immutable:
 
-```
-JavaScript
-
+```JavaScript
 const one = Symbol();
 const two = Symbol();
-console.log(one === two); // false
+console.log(one !== two); // true
 ```
 
 For debugging purposes you can add a description to a symbol:
-```JavaSCript
-
+```JavaScript
 const one = Symbol('My symbol');
 const two = Symbol('Another symbol);
 
-// Even two symbols with different descriptions are unique:
+// Even two symbols with the same description are unique:
 const good = Symbol('mood');
 const bad = Symbol('mood');
-console.log(good === bad); // false
+console.log(good !== bad); // true
 ```
 
 Its main use case is to serve as an identifier for object properties. Using symbols instead of strings allows you to implement private properties:
