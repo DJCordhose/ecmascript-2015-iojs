@@ -585,8 +585,7 @@ accessed using the well-known symbol `Symbol.iterator`.
 The returned `iterator` is an object that has a method called `next`. 
 The return value of the `next` function is another object that has a `value` property (representing the actual value of this element), plus a boolean property `done` that indicates if there are still more values to iterate over.
  
-Ok, this gets a little involved, let us see some code to create such an `iterable`. This example `iterable` can
-provide us with an endless list of unique names by using `name` as prefix and a count as suffix. The count is increased with each iteration (i.e. invocation of the `next` function). 
+Ok, this gets a little involved, let us see some code to create such an `iterable`. This example `iterable` generates unique names by using `name` as prefix and a count as suffix. The count is increased with each iteration (i.e. invocation of the `next` function). Our `next` function always returns `done: false` making it an "endless" iterator:
 
 ```JavaScript
 const uniqueNamesIterable = {
