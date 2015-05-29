@@ -1,6 +1,6 @@
 # ECMAScript 2015 on io.js 
 
-**WORK IN PROGRESS, we plan to update this description as ECMAScript 2015 support in io.js evolves **
+**WORK IN PROGRESS, we plan to update this description as ECMAScript 2015 support in io.js evolves.**
 
 ## Introduction
 ECMAScript 2015, also known as ECMAScript 6 or ES6 for short, is the upcoming version of the ECMAScript standard. 
@@ -48,7 +48,7 @@ tail call optimisation                                | not supported
 Blocks now create scopes for `let` and `const`. Semantics of `var` remain unchanged.
 
 ```JavaScript
-// a simple block, not a function
+// a simple block, not a function or IIFE
 {
     // error: there is no hoisting, you can not use x before definition
     console.log(x);
@@ -535,7 +535,7 @@ console.log(olli.name);  // Granny
 *Note: There are a couple of 
 [well-known symbols](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-well-known-symbols) that are defined
 as static values on `Symbol`. In the specification they are referred to using `@@name`. 
-One example is `Symbol.iterator` (referred to as @@iterator in the spec) which is described in the next section.*
+One example is `Symbol.iterator` (referred to as `@@iterator` in the spec) which is described in the next section.*
 
 ### Iterators and Generators
 
