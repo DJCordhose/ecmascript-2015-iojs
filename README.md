@@ -410,9 +410,9 @@ function sendMessage(message, ...recipients) {
 sendMessage('Keep on rocking!', 'Lemmy', 'Ozzy', 'Angus');
 ```
 
-*Caution: Unfortunately, rest parameters do not work in combination with arrow functions in `io.js`, yet.*
-
-(Note that ES6 also introduces the spread operator that also starts with `...`. This operator is currently not supported by iojs)
+*Caution:*
+- Unfortunately, rest parameters do not work in combination with arrow functions in `io.js`, yet.
+- ES6 also introduces the spread operator that also starts with `...`. This operator is currently not supported by iojs
 
 ### Promise
 
@@ -436,7 +436,7 @@ const promise = new Promise((resolve, reject) => {
 ```
 
 To create such a promise we call the constructor and pass in a function that takes two callbacks - one to
-successfully resolve the promise and another to make it fail. In this case we call the resolve callback
+successfully resolve the promise and another to make it fail. In this case we call the `resolve` callback
 to make it succeed after one second. We have thus created a promise that simply returns the string 
 `Result from promise` after a second. 
 
@@ -489,8 +489,40 @@ as a shortcut of this.*
 
 ### Symbol
 
-Symbol is a new primitive data type. Its main use case is to serve as an identifier for object properties. Using them 
-instead of strings allows you to implement private methods of properties:
+ES6 introduced a new primitive datatype `symbol` and it's wrapper type `Symbol`. Using symbols you can create unique "identifiers". Its main use case is to serve as an identifier for object properties.
+
+
+Using symbols instead of strings allows you to implement private methods of properties. Let's compare two versions, first using a version without Symbols:
+```JavaScript
+const Person = () => { // IIFE using arrow function
+    // private
+    const nameProperty = 'PRIVATE_PROPERTY_NAME';
+   
+    class Person {
+
+        constructor(name) {
+            this[nameProperty] = name;
+        }
+
+        get name() {
+            return this[nameProperty];
+        }
+    }
+
+    return Person;
+}();
+
+const olli = new Person("Olli");
+
+console.log(olli.name); // Olli
+```
+Implementing the private property this way still makes it easy to access it, as we can read the value of "propertyName" and use it to access the property:
+```JavaScript
+const lilo = new Person("Lilo");
+console.log(lilo[PRIVATE_PROPERTY_NAME]); // Lilo
+```
+
+Now let's rewrite the example to make it at least harder to access our private property:
 
 ```JavaScript
 const Person = () => { // IIFE using arrow function
@@ -521,7 +553,7 @@ console.log(olli[nameSymbol])
 ```
 
 In this example we made it impossible to change the name property of objects of class `Person`. To be more precise,
-it is not really impossible, but you can still access all symbols if you really want to:
+it is not really impossible, as you can still access all symbols of an object using the new introduced method `Object.getOwnPropertySymbols` if you really want to:
 
 ```JavaScript
 const ownPropertySymbols = Object.getOwnPropertySymbols(olli);
@@ -543,14 +575,15 @@ One example is `Symbol.iterator` (referred to as `@@iterator` in the spec) which
 if it has a method that returns an `iterator`. This `iterator`-method does not have a name, but is 
 accessed using the well-known symbol `Symbol.iterator`. 
 The returned `iterator` is an object that has a method called `next`. 
-The return value is another object that has a `value` property, 
-plus a boolean 'done' property that indicates if there are still more values to iterate over.
+The return value of the `next` function is another object that has a `value` property (representing the actual value of this element), plus a boolean property `done` that indicates if there are still more values to iterate over.
  
-Ok, this gets a little involved, let us see some code to create such an `iterable`. This `iterable` can
-provide us with unique names by using `name` as prefix and adding a count to it:
+Ok, this gets a little involved, let us see some code to create such an `iterable`. This example `iterable` can
+provide us with an endless list of unique names by using `name` as prefix and a count as suffix. The count is increased with each iteration (i.e. invocation of the `next` function). 
 
 ```JavaScript
 const uniqueNamesIterable = {
+
+    // The name of the iterator-function is derived from a computed property value - it is NOT 'iterator':
     [Symbol.iterator]() {
         let count = 0;
         const prefix = 'name';
@@ -580,7 +613,7 @@ for (let name of uniqueNamesIterable) {
 // name2
 ```
 
-For transparency, we can simulate this behavior by doing the same thing manually:
+For transparency, we can simulate this behavior by doing the same thing manually using the `next` function of the iterator:
 
 ```JavaScript
 const iterator = uniqueNamesIterable[Symbol.iterator]();
@@ -596,9 +629,9 @@ As long as 'done' is false, `for..of` will keep on going.
 *Note: The spread operator `...` - which has not been implemented in io.js, yet - uses the same 
 protocol to enumerate all values of an `iterable`.* 
 
-Generators can help to simplify this by reducing a bit of boiler plate code. A generator both creates the
+*Generators* can help to simplify this by reducing a bit of boiler plate code. A generator both creates the
 `iterator` and supplies its implementation. To indicate that a function is a generator, 
-you use the `function*` declaration.
+you use the `function*` declaration (note the star after the `function` keyword).
 
 This code does the same thing as the example before:
 
@@ -616,5 +649,5 @@ const uniqueNamesIterable = {
 ```
 
 You no longer have to provide a `next`-method, but rather implement the 
-generator in a sequential style. Instead of using return you use `yield` to provide values for iteration. 
+generator in a sequential style. Instead of using `return` you use `yield` to provide values for iteration. 
 The generator can also determine if we are done, yet, so you do not have to provide that information yourself.
