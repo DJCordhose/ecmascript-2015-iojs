@@ -1,6 +1,6 @@
 # ECMAScript 2015 on io.js 
 
-**WORK IN PROGRESS**
+**WORK IN PROGRESS, we plan to update this description as ECMAScript 2015 support in io.js evolves **
 
 ## Introduction
 ECMAScript 2015, also known as ECMAScript 6 or ES6 for short, is the upcoming version of the ECMAScript standard. 
@@ -36,6 +36,7 @@ Feature                                               | Command line switch need
 [classes](#classes)                                   | already enabled (`--harmony-computed-property-names` for computed property names)   
 [rest parameters](#rest-parameters)                   | `--harmony-rest-parameters`
 [Promise](#promise)                                   | already enabled
+[Symbol](#symbol)                                     | already enabled
 [iterators and generators](#iterators-and-generators) | already enabled
 Destructuring                                         | not supported
 Default values                                        | not supported
@@ -485,6 +486,51 @@ Additionally, `io.js` allows you to [catch all unhandled errors from promises](h
 `then` would be the `bind` operation. And the `return` operation would be the `Promise` constructor in combination with the `resolve` method
 or [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
 as a shortcut of this.* 
+
+### Symbol
+
+Symbol is a new primitive data type. Its main use case is to serve as an identifier for object properties. Using them 
+instead of strings allows you to implement private methods of properties:
+
+```JavaScript
+const Person = () => { // IIFE using arrow function
+    // private
+    const nameSymbol = Symbol('name'); // name is optional
+    console.log(typeof nameSymbol); // symbol
+
+    class Person {
+
+        constructor(name) {
+            this[nameSymbol] = name;
+        }
+
+        get name() {
+            return this[nameSymbol];
+        }
+    }
+
+    return Person;
+}();
+
+const olli = new Person("Olli");
+
+console.log(olli.name); // Olli
+
+// error as nameSymbol is out of scope
+console.log(olli[nameSymbol])
+```
+
+In this example we made it impossible to change the name property of objects of class `Person`. To be more precise,
+it is not really impossible, but you can still access all symbols if you really want to:
+
+```JavaScript
+const ownPropertySymbols = Object.getOwnPropertySymbols(olli);
+console.log(ownPropertySymbols); // [ Symbol(name) ]
+
+// still possible to access private property if you really want
+olli[ownPropertySymbols[0]] = 'Granny';
+console.log(olli.name);  // Granny
+```
 
 ### Iterators and Generators
 
