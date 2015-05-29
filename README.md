@@ -532,11 +532,16 @@ olli[ownPropertySymbols[0]] = 'Granny';
 console.log(olli.name);  // Granny
 ```
 
+*Note: There are a couple of 
+[well-known symbols](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-well-known-symbols) that are defined
+as static values on `Symbol`. In the specification they are referred to using `@@name`. 
+One example is `Symbol.iterator` (referred to as @@iterator in the spec) which is described in the next section.*
+
 ### Iterators and Generators
 
 [for..of as described above](#forof) can iterate over every object that is `iterable`. An object is `iterable`
 if it has a method that returns an `iterator`. This `iterator`-method does not have a name, but is 
-accessed using the well known symbol `Symbol.iterator`. 
+accessed using the well-known symbol `Symbol.iterator`. 
 The returned `iterator` is an object that has a method called `next`. 
 The return value is another object that has a `value` property, 
 plus a boolean 'done' property that indicates if there are still more values to iterate over.

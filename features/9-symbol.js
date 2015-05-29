@@ -1,4 +1,4 @@
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
 
 const Person = () => { // IIFE using arrow function
     // private
