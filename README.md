@@ -38,6 +38,7 @@ Feature                                               | Command line switch need
 [Promise](#promise)                                   | already enabled
 [Symbol](#symbol)                                     | already enabled
 [iterators and generators](#iterators-and-generators) | already enabled
+Modules                                               | not supported
 Destructuring                                         | not supported
 Default values                                        | not supported
 Spread operator                                       | not supported
@@ -511,7 +512,7 @@ as a shortcut of this.*
 
 ### Symbol
 
-ES6 introduced a new primitive datatype `symbol`. Using symbols you can create unique "identifiers" as each symbol is unique and immutable:
+ES6 introduces a new primitive data type `symbol`. Using symbols you can create unique "identifiers" as each symbol is unique and immutable:
 
 ```JavaScript
 const one = Symbol();
