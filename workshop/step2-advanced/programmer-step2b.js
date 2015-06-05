@@ -1,6 +1,6 @@
 'use strict';
 
-// have a lookt at the symbol example to see how to make this really private
+// have a look at the symbol example to see how to make this really private
 const nameSymbol = Symbol()
 
 class Person {
