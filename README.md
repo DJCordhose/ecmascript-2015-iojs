@@ -27,13 +27,13 @@ io.js as of release 2.0 (partially) supports the following new features:
 
 Feature                                               | Command line switch needed to enable
 ----------------------------------------------------- | -------------------------------------
-[let + const](#let--const)                            | already enabled
+[let + const](#let--const)                            | enabled when using 'use strict'
 [for..of](#forof)                                     | already enabled
 [template strings](#template-strings)                 | already enabled
 [arrow functions](#arrow-functions)                   | `--harmony_arrow_functions`
 [enhanced object literal](#enhanced-object-literal)   | already enabled (`--harmony-computed-property-names` for computed property names)                 
 [keyed collections](#keyed-collections)               | already enabled
-[classes](#classes)                                   | already enabled (`--harmony-computed-property-names` for computed property names)   
+[classes](#classes)                                   | enabled when using 'use strict' (`--harmony-computed-property-names` for computed property names)   
 [rest parameters](#rest-parameters)                   | `--harmony-rest-parameters`
 [Promise](#promise)                                   | already enabled
 [Symbol](#symbol)                                     | already enabled

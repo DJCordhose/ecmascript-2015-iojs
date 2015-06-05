@@ -1,4 +1,6 @@
-// TODO: how to put this into a block to make nameSymbol really private?
+'use strict';
+
+// have a lookt at the symbol example to see how to make this really private
 const nameSymbol = Symbol()
 
 class Person {

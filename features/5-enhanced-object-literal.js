@@ -1,3 +1,5 @@
+'use strict';
+
 const name = 'Lemmy';
 
 const person = {
