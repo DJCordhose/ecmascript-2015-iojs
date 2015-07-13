@@ -22,6 +22,10 @@ the examples need at least version 2.0 of io.js.
 
 In the `workshop` folder you can try the new features on a complete example.
 
+## Performance
+
+When using ES6 feaures with or without transpiling to ES5 or even ES3 you should consider the potential performance penalty. There is this [great overview](http://kpdecker.github.io/six-speed/) that reveals dramatic slow downs when using ES6 features, but sometimes also some speed ups. So be careful. This blogpost on [ES6 Feature Performance](http://incaseofstairs.com/2015/06/es6-feature-performance/) gives a little bit more context, but is not as nicely formatted.
+
 ## Overview
 io.js as of release 2.0 (partially) supports the following new features:
 
