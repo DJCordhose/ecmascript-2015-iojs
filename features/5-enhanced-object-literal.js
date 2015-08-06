@@ -25,7 +25,6 @@ console.log(person.toString()); // This is Lemmy
 console.log(musician.name); // Lemmy (note 'name' comes from person)
 console.log(musician.toString()); // This is Lemmy, let's get loud
 
-// Only with: --harmony-computed-property-names
 function secretKey() {
 	return 666;
 }

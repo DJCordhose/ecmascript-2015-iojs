@@ -1,5 +1,7 @@
 # ECMAScript 2015 on io.js 
 
+**UPDATE for io.js 3.0**: This document now reflects the status of ECMAScript 2015 in the 3.0 version of io.js.
+
 **WORK IN PROGRESS, we plan to update this description as ECMAScript 2015 support in io.js evolves.**
 
 ## Introduction
@@ -18,7 +20,7 @@ running the first example from the command line would look this this:
 > ./run.sh features/1-let-const.js
 
 Note: `run.sh` automatically switches on all [ES6 features](https://iojs.org/es6.html) of `io.js` even when they are not mature, yet. Note that
-the examples need at least version 2.0 of io.js.
+the examples need at least version 3.0 of io.js.
 
 In the `workshop` folder you can try the new features on a complete example.
 
@@ -27,7 +29,7 @@ In the `workshop` folder you can try the new features on a complete example.
 When using ES6 feaures with or without transpiling to ES5 or even ES3 you should consider the potential performance penalty. There is this [great overview](http://kpdecker.github.io/six-speed/) that reveals dramatic slow downs when using ES6 features, but sometimes also some speed ups. So be careful. This blogpost on [ES6 Feature Performance](http://incaseofstairs.com/2015/06/es6-feature-performance/) gives a little bit more context, but is not as nicely formatted.
 
 ## Overview
-io.js as of release 2.0 (partially) supports the following new features:
+io.js as of release 3.0 (partially) supports the following new features:
 
 Feature                                               | Command line switch needed to enable
 ----------------------------------------------------- | -------------------------------------
@@ -35,9 +37,9 @@ Feature                                               | Command line switch need
 [for..of](#forof)                                     | already enabled
 [template strings](#template-strings)                 | already enabled
 [arrow functions](#arrow-functions)                   | `--harmony_arrow_functions`
-[enhanced object literal](#enhanced-object-literal)   | already enabled (`--harmony-computed-property-names` for computed property names)                 
+[enhanced object literal](#enhanced-object-literal)   | already enabled (Prior to 3.0 `--harmony-computed-property-names` is needed for computed property names)                 
 [keyed collections](#keyed-collections)               | already enabled
-[classes](#classes)                                   | enabled when using 'use strict' (`--harmony-computed-property-names` for computed property names)   
+[classes](#classes)                                   | enabled when using 'use strict' (Prior to 3.0 `--harmony-computed-property-names` is needed for computed property names)   
 [rest parameters](#rest-parameters)                   | `--harmony-rest-parameters`
 [Promise](#promise)                                   | already enabled
 [Symbol](#symbol)                                     | already enabled
@@ -185,7 +187,7 @@ console.log(musician.name); // Lemmy (note 'name' comes from person)
 console.log(musician.toString()); // This is Lemmy, let's get loud
 ```
 
-And it is even possible to use property names that are defined dynamically using a function call. Note that this feature requires the `--harmony-computed-property-names`
+And it is even possible to use property names that are defined dynamically using a function call. Note that prior to io.js 3.0 this feature requires the `--harmony-computed-property-names`
  switch to be set:
 
 ```JavaScript
@@ -300,7 +302,7 @@ console.log(Musician.newGuitarPlayer('Phil').toString()); // I'm Phil and I'm pl
 ```
 
 And as with the object literal you can even use computed property names in your class. Note that you have to enable this feature
-with the `--harmony-computed-property-names` flag when running iojs:
+with the `--harmony-computed-property-names` flag when running iojs prior to version 3.0:
 
 ```JavaScript
 function secretKey() {
