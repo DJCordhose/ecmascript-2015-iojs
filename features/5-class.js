@@ -89,5 +89,17 @@ class NeighbourHood {
 const hood = new NeighbourHood();
 console.log(hood.no_667()); // Neighbour of the beast
 
+// also possible: class as expression
+const Programmer = class extends Person {
+	constructor(name, language) {
+		super(name);
+		this.language = language;
+	}
 
+	code() {
+		return `${this.name} codes in ${this.language}`;
+	}
+};
 
+const olli = new Programmer('Olli', 'JavaScript');
+console.log(olli.code());

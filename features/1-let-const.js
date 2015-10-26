@@ -5,7 +5,7 @@
 
 // a simple block, not a function
 {
-    // error: there is no hoisting, you can not use x before definition
+     //error: there is no hoisting, you can not use x before definition
     //console.log(x);
     let x = 'outer';
     console.log(x);
